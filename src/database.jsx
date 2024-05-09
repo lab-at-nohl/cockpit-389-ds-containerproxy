@@ -159,7 +159,7 @@ export class Database extends React.Component {
 
     loadSuffixList () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "suffix", "list", "--suffix"
         ];
         log_cmd("loadSuffixList", "Get a list of all the suffixes", cmd);
@@ -175,7 +175,7 @@ export class Database extends React.Component {
 
     loadPwdStorageSchemes () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "pwpolicy", "list-schemes"
         ];
         log_cmd("loadPwdStorageSchemes", "Get a list of all the password storage sehemes", cmd);
@@ -194,7 +194,7 @@ export class Database extends React.Component {
             loaded: false,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get", "nsslapd-ndn-cache-max-size"
         ];
         log_cmd("loadNDN", "Load NDN cache size", cmd);
@@ -229,7 +229,7 @@ export class Database extends React.Component {
             this.setState({ firstLoad: false });
         }
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "config", "get"
         ];
         log_cmd("loadGlobalConfig", "Load the database global configuration", cmd);
@@ -299,7 +299,7 @@ export class Database extends React.Component {
     loadAvailableControls () {
         // Get the available control oids from rootdse
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-get", "--avail-controls"
         ];
         log_cmd("loadAvailableControls", "Get available controls", cmd);
@@ -323,7 +323,7 @@ export class Database extends React.Component {
 
     loadDefaultConfig() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-get-def"
         ];
         log_cmd("loadDefaultConfig", "Load chaining default configuration", cmd);
@@ -388,7 +388,7 @@ export class Database extends React.Component {
 
     loadChainingConfig(tabIdx) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-get"
         ];
         log_cmd("loadChainingConfig", "Load chaining OIDs and Controls", cmd);
@@ -444,7 +444,7 @@ export class Database extends React.Component {
 
     loadSuffixTree(fullReset) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "get-tree",
         ];
         log_cmd("loadSuffixTree", "Start building the suffix tree", cmd);
@@ -526,7 +526,7 @@ export class Database extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "link-get", suffix
         ];
         log_cmd("loadChainingLink", "Load chaining link configuration", cmd);
@@ -781,7 +781,7 @@ export class Database extends React.Component {
 
         // Create a new suffix
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "create", "--be-name", this.state.createBeName, '--suffix', this.state.createSuffix,
         ];
         if (this.state.createSampleEntries) {
@@ -822,7 +822,7 @@ export class Database extends React.Component {
 
     getAutoTuning(suffix) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "config", "get"
         ];
         log_cmd("getAutoTuning", "Check cache auto tuning", cmd);
@@ -844,7 +844,7 @@ export class Database extends React.Component {
 
     loadVLV(suffix) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "vlv-index", "list", suffix
         ];
         const tableKey = this.state.vlvTableKey + 1;
@@ -865,7 +865,7 @@ export class Database extends React.Component {
 
     loadAttrEncrypt(suffix) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "attr-encrypt", "--list", "--just-names", suffix
         ];
         log_cmd("loadAttrEncrypt", "Load encrypted attrs", cmd);
@@ -891,7 +891,7 @@ export class Database extends React.Component {
         // most time consuming (and which controls the spinner), and spawn new
         // commands for the other areas.
         const index_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "index", "list", suffix
         ];
         log_cmd("loadIndexes", "Load backend indexes", index_cmd);
@@ -943,7 +943,7 @@ export class Database extends React.Component {
 
     loadReferrals(suffix) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "suffix", "get", suffix
         ];
         log_cmd("loadReferrals", "get referrals", cmd);
@@ -973,7 +973,7 @@ export class Database extends React.Component {
         }, this.loadAttrs());
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "suffix", "get", suffix
         ];
         log_cmd("loadSuffix", "Load suffix config", cmd);
@@ -1011,7 +1011,7 @@ export class Database extends React.Component {
 
                     // Now load VLV indexes
                     const cmd = [
-                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "backend", "vlv-index", "list", suffix
                     ];
                     log_cmd("loadSuffix", "Load VLV indexes", cmd);
@@ -1027,7 +1027,7 @@ export class Database extends React.Component {
                                 });
 
                                 const cmd = [
-                                    "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                                    "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                                     "backend", "attr-encrypt", "--list", "--just-names", suffix
                                 ];
                                 log_cmd("loadAttrEncrypt", "Load encrypted attrs", cmd);
@@ -1046,7 +1046,7 @@ export class Database extends React.Component {
                                                 }
                                             });
                                             const index_cmd = [
-                                                "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                                                "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                                                 "backend", "index", "list", suffix
                                             ];
                                             log_cmd("loadIndexes", "Load backend indexes", index_cmd);
@@ -1135,7 +1135,7 @@ export class Database extends React.Component {
 
     loadLDIFs() {
         const cmd = [
-            "dsctl", "-j", this.props.serverId, "ldifs"
+            "podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "ldifs"
         ];
         log_cmd("loadLDIFs", "Load LDIF Files", cmd);
         cockpit
@@ -1160,7 +1160,7 @@ export class Database extends React.Component {
             });
         }
         const cmd = [
-            "dsctl", "-j", this.props.serverId, "backups"
+            "podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "backups"
         ];
         log_cmd("loadBackupsDatabase", "Load Backups", cmd);
         cockpit
@@ -1180,7 +1180,7 @@ export class Database extends React.Component {
     loadAttrs() {
         // Now get the schema that various tabs use
         const attr_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema", "attributetypes", "list"
         ];
         log_cmd("loadAttrs", "Get attrs", attr_cmd);

@@ -109,9 +109,9 @@ export class Plugins extends React.Component {
 
     getSchema() {
         const attr_cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "list"
@@ -127,9 +127,9 @@ export class Plugins extends React.Component {
                     }
 
                     const oc_cmd = [
-                        "dsconf",
+                        "podman-389-ds.sh", "dsconf",
                         "-j",
-                        "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "schema",
                         "objectclasses",
                         "list"
@@ -174,9 +174,9 @@ export class Plugins extends React.Component {
 
     pluginList() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "list"
         ];
@@ -217,9 +217,9 @@ export class Plugins extends React.Component {
         let nothingToSetErr = false;
         let basicPluginSuccess = false;
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "set",
             data.name,
@@ -350,9 +350,9 @@ export class Plugins extends React.Component {
     togglePlugin() {
         const new_status = this.state.togglePluginEnabled ? "off" : "on";
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "set",
             "--enabled=" + new_status,

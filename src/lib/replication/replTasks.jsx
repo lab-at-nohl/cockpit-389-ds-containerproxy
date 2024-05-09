@@ -140,7 +140,7 @@ export class ReplRUV extends React.Component {
 
     cleanRUV () {
         // Enable/disable agmt
-        const cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+        const cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'repl-tasks', 'cleanallruv', '--replica-id=' + this.state.rid,
             '--force-cleaning', '--suffix=' + this.props.suffix];
 
@@ -198,7 +198,7 @@ export class ReplRUV extends React.Component {
     importChangelog () {
         // Do changelog import
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "import-changelog", "default", "--replica-root", this.props.suffix
         ];
 
@@ -235,7 +235,7 @@ export class ReplRUV extends React.Component {
     exportChangelog () {
         // Do changelog export
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "export-changelog"
         ];
 

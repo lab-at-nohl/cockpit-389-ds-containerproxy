@@ -365,9 +365,9 @@ class AutoMembership extends React.Component {
 
     loadDefinitions() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "automember",
             "list",
@@ -407,9 +407,9 @@ class AutoMembership extends React.Component {
 
     loadRegexes(defName) {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "automember",
             "list",
@@ -463,9 +463,9 @@ class AutoMembership extends React.Component {
         } else {
             this.loadRegexes(name);
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "automember",
                 "definition",
@@ -600,9 +600,9 @@ class AutoMembership extends React.Component {
             );
         } else {
             let cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "automember",
                 "definition",
@@ -673,9 +673,9 @@ class AutoMembership extends React.Component {
 
         for (const regexToDelete of regexesToDelete) {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "automember",
                 "definition",
@@ -727,9 +727,9 @@ class AutoMembership extends React.Component {
             }
 
             let cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "automember",
                 "definition",
@@ -827,9 +827,9 @@ class AutoMembership extends React.Component {
 
     deleteDefinition() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "automember",
             "definition",

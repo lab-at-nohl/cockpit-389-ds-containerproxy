@@ -103,7 +103,7 @@ export class SuffixReferrals extends React.Component {
             modalSpinning: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "suffix", "set", "--del-referral=" + this.state.removeRef, this.props.suffix
         ];
         log_cmd("deleteRef", "Delete suffix referral", cmd);
@@ -142,7 +142,7 @@ export class SuffixReferrals extends React.Component {
 
         // Add referral
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "suffix", "set", "--add-referral=" + this.state.refValue, this.props.suffix
         ];
         log_cmd("saveRef", "Add referral", cmd);

@@ -168,7 +168,7 @@ export class GlobalDatabaseConfig extends React.Component {
         const msg = "Successfully updated database configuration";
         if (this.state._ndncachemaxsize != this.state.ndncachemaxsize) {
             const cmd = [
-                'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+                'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
                 'config', 'replace', 'nsslapd-ndn-cache-max-size=' + this.state.ndncachemaxsize
             ];
 
@@ -225,7 +225,7 @@ export class GlobalDatabaseConfig extends React.Component {
     save_db_config() {
         // Build up the command list
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'backend', 'config', 'set'
         ];
         let requireRestart = false;

@@ -114,7 +114,7 @@ export class DatabaseMonitor extends React.Component {
     refreshCache() {
         // Search for db cache stat and update state
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "ldbm"
         ];
         cockpit

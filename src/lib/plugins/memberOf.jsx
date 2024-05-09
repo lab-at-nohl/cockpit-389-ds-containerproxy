@@ -596,9 +596,9 @@ class MemberOf extends React.Component {
             this.props.addNotification("warning", "Fixup DN is required.");
         } else {
             let cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "memberof",
                 "fixup",
@@ -660,9 +660,9 @@ class MemberOf extends React.Component {
             let configExcludeScopeList = [];
             let configGroupAttrObjectList = [];
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "memberof",
                 "config-entry",
@@ -779,9 +779,9 @@ class MemberOf extends React.Component {
             );
         } else {
             let cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "memberof",
                 "config-entry",
@@ -862,9 +862,9 @@ class MemberOf extends React.Component {
 
     deleteConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "memberof",
             "config-entry",
@@ -1017,9 +1017,9 @@ class MemberOf extends React.Component {
         } = this.state;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "memberof",
             "set",

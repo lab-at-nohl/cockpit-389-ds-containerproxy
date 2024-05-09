@@ -182,7 +182,7 @@ export class ChainingDatabaseConfig extends React.Component {
     save_chaining_config () {
         // Build up the command list
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'chaining', 'config-set-def'
         ];
         let val = "";
@@ -318,7 +318,7 @@ export class ChainingDatabaseConfig extends React.Component {
             return;
         }
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-set", "--add-control=" + this.state.selectedOid
         ];
         this.setState({
@@ -369,7 +369,7 @@ export class ChainingDatabaseConfig extends React.Component {
             return;
         }
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-set", "--del-control=" + this.state.removeOid
         ];
         this.setState({
@@ -436,7 +436,7 @@ export class ChainingDatabaseConfig extends React.Component {
             return;
         }
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-set", "--add-comp=" + this.state.selectedComp
         ];
 
@@ -479,7 +479,7 @@ export class ChainingDatabaseConfig extends React.Component {
         }
         // Remove chaining comps
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "config-set", "--del-comp=" + this.state.removeComp
         ];
         this.setState({
@@ -1215,7 +1215,7 @@ export class ChainingConfig extends React.Component {
 
         // Build up the command of all the changes we need to make
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "link-set", this.props.suffix
         ];
 
@@ -1318,7 +1318,7 @@ export class ChainingConfig extends React.Component {
 
     deleteLink() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "link-delete", this.props.suffix
         ];
         log_cmd("deleteLink", "Delete database chaining link", cmd);

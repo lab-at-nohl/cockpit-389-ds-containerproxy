@@ -132,7 +132,7 @@ class DeleteOperationWizard extends React.Component {
 
         const ldapsearchCmd = 'ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL ' +
             `-b "${this.props.wizardEntryDn}" ` +
-            `-H ldapi://%2fvar%2frun%2fslapd-${this.props.editorLdapServer}.socket ` +
+            `-H ldapi://%2fdata%2frun%2fslapd-${this.props.editorLdapServer}.socket ` +
             '"(objectClass=*)" \\* +';
         // We should also be searching for objectclass=ldapSubentry, but ldapdelete -r
         // only does a objectclass=* search for its recursive delete

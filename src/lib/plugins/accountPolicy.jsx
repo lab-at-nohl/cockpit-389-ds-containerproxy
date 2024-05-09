@@ -231,9 +231,9 @@ class AccountPolicy extends React.Component {
     sharedConfigExists() {
         if (this.state.configArea) {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "account-policy",
                 "config-entry",
@@ -289,9 +289,9 @@ class AccountPolicy extends React.Component {
             });
         } else {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "account-policy",
                 "config-entry",
@@ -415,9 +415,9 @@ class AccountPolicy extends React.Component {
         } = this.state;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "account-policy",
             "config-entry",
@@ -533,9 +533,9 @@ class AccountPolicy extends React.Component {
 
     deleteConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "account-policy",
             "config-entry",
@@ -677,9 +677,9 @@ class AccountPolicy extends React.Component {
 
     saveConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "account-policy",
             "set",

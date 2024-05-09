@@ -69,7 +69,7 @@ export class Changelog extends React.Component {
 
     saveSettings () {
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'replication', 'set-changelog', '--suffix', this.props.suffix
         ];
         let requires_restart = false;
@@ -160,7 +160,7 @@ export class Changelog extends React.Component {
         this.setState({
             loading: true,
         });
-        const cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+        const cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'replication', 'get-changelog', '--suffix', this.props.suffix];
         log_cmd("reloadChangelog", "Load the replication changelog info", cmd);
         cockpit

@@ -203,9 +203,9 @@ class PassthroughAuthentication extends React.Component {
 
     loadURLs() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "ldap-pass-through-auth",
             "list"
@@ -287,9 +287,9 @@ class PassthroughAuthentication extends React.Component {
 
     deleteURL() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "ldap-pass-through-auth",
             "delete",
@@ -350,9 +350,9 @@ class PassthroughAuthentication extends React.Component {
         }`;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "ldap-pass-through-auth",
             action

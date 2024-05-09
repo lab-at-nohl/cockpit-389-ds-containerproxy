@@ -283,7 +283,7 @@ class EditorTreeView extends React.Component {
         const entryIsLoading = false;
         let entryState = "";
 
-        const cmd = ["dsidm", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.editorLdapServer + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsidm", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.editorLdapServer + ".socket",
             "-b", entryDn, isRole ? "role" : "account", "entry-status", entryDn];
         log_cmd("updateEntryRows", "Checking if entry is activated", cmd);
         cockpit

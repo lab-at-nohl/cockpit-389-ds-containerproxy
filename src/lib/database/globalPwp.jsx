@@ -178,7 +178,7 @@ export class GlobalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'config', 'replace'
         ];
 
@@ -282,7 +282,7 @@ export class GlobalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'config', 'replace'
         ];
 
@@ -359,7 +359,7 @@ export class GlobalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'config', 'replace'
         ];
 
@@ -480,7 +480,7 @@ export class GlobalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'config', 'replace'
         ];
 
@@ -557,7 +557,7 @@ export class GlobalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'config', 'replace'
         ];
 
@@ -599,7 +599,7 @@ export class GlobalPwPolicy extends React.Component {
             loading: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("loadGlobal", "Load global password policy", cmd);

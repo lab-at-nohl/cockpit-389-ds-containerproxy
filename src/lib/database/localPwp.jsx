@@ -1356,7 +1356,7 @@ export class LocalPwPolicy extends React.Component {
             action = "addsubtree";
         }
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'localpwp', action, this.state.policyDN
         ];
 
@@ -1440,7 +1440,7 @@ export class LocalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'localpwp', 'set', this.state.policyName
         ];
 
@@ -1517,7 +1517,7 @@ export class LocalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'localpwp', 'set', this.state.policyName
         ];
 
@@ -1594,7 +1594,7 @@ export class LocalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'localpwp', 'set', this.state.policyName
         ];
 
@@ -1714,7 +1714,7 @@ export class LocalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'localpwp', 'set', this.state.policyName
         ];
 
@@ -1791,7 +1791,7 @@ export class LocalPwPolicy extends React.Component {
         });
 
         let cmd = [
-            'dsconf', '-j', "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            'podman-389-ds.sh', 'dsconf', '-j', "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             'localpwp', 'set', this.state.policyName
         ];
 
@@ -1835,7 +1835,7 @@ export class LocalPwPolicy extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "localpwp", "remove", this.state.deleteName
         ];
         log_cmd("deletePolicy", "delete policy", cmd);
@@ -1859,7 +1859,7 @@ export class LocalPwPolicy extends React.Component {
             loading: true,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "localpwp", "list"
         ];
         log_cmd("loadPolicies", "Load all the local password policies for the table", cmd);
@@ -2041,7 +2041,7 @@ export class LocalPwPolicy extends React.Component {
                         _create_passwordadminskipinfoupdate: false,
                     }, () => {
                         const gcmd = [
-                            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                             "config", "get", "passwordstoragescheme"
                         ];
                         log_cmd("loadPolicies", "Load global password policy password scheme", gcmd);
@@ -2083,7 +2083,7 @@ export class LocalPwPolicy extends React.Component {
 
     loadLocal(name) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "localpwp", "get", name
         ];
         log_cmd("loadLocal", "Load a local password policy", cmd);

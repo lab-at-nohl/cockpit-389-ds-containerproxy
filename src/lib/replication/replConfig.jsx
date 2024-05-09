@@ -125,7 +125,7 @@ export class ReplConfig extends React.Component {
         if (changeType == "Promoting") {
             action = "promote";
         }
-        let cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket', 'replication', action,
+        let cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket', 'replication', action,
             '--suffix=' + this.props.suffix, "--newrole=" + this.state.newRole];
         if (this.state.newRole == "Supplier") {
             const ridNum = parseInt(this.state.newRID, 10);
@@ -229,7 +229,7 @@ export class ReplConfig extends React.Component {
         });
 
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "create-manager", "--suffix=" + this.props.suffix, "--name=" + this.state.manager,
         ];
 
@@ -383,7 +383,7 @@ export class ReplConfig extends React.Component {
 
     deleteManager() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "delete-manager", "--suffix=" + this.props.suffix, "--name=" + this.state.manager
         ];
         this.setState({
@@ -417,7 +417,7 @@ export class ReplConfig extends React.Component {
 
     saveConfig () {
         const cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'replication', 'set', '--suffix=' + this.props.suffix
         ];
 

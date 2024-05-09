@@ -158,7 +158,7 @@ export class Ciphers extends React.Component {
         }
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "ciphers", "set", "--", prefs
         ];
         log_cmd("saveCipherPref", "Saving cipher preferences", cmd);

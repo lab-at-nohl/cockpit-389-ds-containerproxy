@@ -63,9 +63,9 @@ function getModDateUTC (modDate) {
 
 export function getUserSuffixes (serverId, suffixCallback) {
   const suffixCmd = [
-    'dsconf',
+    'podman-389-ds.sh', 'dsconf',
     '-j',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     'backend',
     'suffix',
     'list',
@@ -92,7 +92,7 @@ export function ldapPing (serverId, pingCallback) {
     '-b',
     'cn=config', // params.baseDn,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     '-s',
     'base',
     '-l',
@@ -131,7 +131,7 @@ export function getRootSuffixEntryDetails (params, entryDetailsCallback) {
     '-b',
     params.baseDn,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + params.serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + params.serverId + '.socket',
     '-s',
     'base',
     '-l',
@@ -241,7 +241,7 @@ export function getSearchEntries (params, resultCallback) {
     '-b',
     params.searchBase,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + params.serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + params.serverId + '.socket',
     '-s',
     params.searchScope,
     '-l',
@@ -350,7 +350,7 @@ export function getBaseLevelEntryAttributes (serverId, baseDn, entryAttributesCa
     '-b',
     baseDn,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     '-s',
     'base',
     '(|(objectClass=*)(objectClass=ldapSubEntry))',
@@ -365,7 +365,7 @@ export function getBaseLevelEntryAttributes (serverId, baseDn, entryAttributesCa
     '/usr/bin/sh',
     '-c',
     `ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL -b "${baseDn}"` +
-    ` -H ldapi://%2fvar%2frun%2fslapd-${serverId}.socket` +
+    ` -H ldapi://%2fdata%2frun%2fslapd-${serverId}.socket` +
     ` ${optionTimeLimit}` +
     ' -s base "(|(objectClass=*)(objectClass=ldapSubEntry))" nsRoleDN nsAccountLock \\*' // +
     // ' | /usr/bin/head -c 150001' // Taking 1 additional character to check if the
@@ -375,7 +375,7 @@ export function getBaseLevelEntryAttributes (serverId, baseDn, entryAttributesCa
   // TODO: The return code will always be 0 because of the ' | /usr/bin/head -c 150001' part.
   // Need to find a way to retrieve the LDAP return code...
   /*
-    [root@cette ~]# ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL -b "o=empty" -H ldapi://%2fvar%2frun%2fslapd-ALPS_Grenoble.socket -s base "(|(objectClass=*)(objectClass=ldapSubEntry))" \* | /usr/bin/head -c 150001 2>/dev/null
+    [root@cette ~]# ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL -b "o=empty" -H ldapi://%2fdata%2frun%2fslapd-ALPS_Grenoble.socket -s base "(|(objectClass=*)(objectClass=ldapSubEntry))" \* | /usr/bin/head -c 150001 2>/dev/null
     SASL/EXTERNAL authentication started
     SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
     SASL SSF: 0
@@ -447,7 +447,7 @@ export function getBaseLevelEntryFullAttributes (serverId, baseDn, entryAttribut
     '-b',
     baseDn,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     '-s',
     'base',
     '-l',
@@ -513,7 +513,7 @@ export function getOneLevelEntries (params, oneLevelCallback) {
     '-b',
     params.baseDn,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + params.serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + params.serverId + '.socket',
     '-s',
     'one',
     filter,
@@ -631,7 +631,7 @@ export function runGenericSearch (params, searchCallback) {
     '-b',
     params.baseDn,
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + params.serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + params.serverId + '.socket',
     '-s',
     params.scope,
     params.filter,
@@ -642,7 +642,7 @@ export function runGenericSearch (params, searchCallback) {
     '/usr/bin/sh',
     '-c',
     'ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL -b "' + params.baseDn +
-    '" -H ldapi://%2fvar%2frun%2fslapd-' + params.serverId + '.socket' +
+    '" -H ldapi://%2fdata%2frun%2fslapd-' + params.serverId + '.socket' +
     ' -s ' + params.scope +
     ' "' + params.filter + '" ' +
     params.attributes
@@ -676,7 +676,7 @@ export function getMonitoringInfo (serverId, monitorEntryCallback) {
     '-b',
     'cn=monitor',
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     '-s',
     'base',
     'version',
@@ -821,13 +821,13 @@ export function modifyLdapEntry (params, ldifArray, modifyEntryCallback) {
     '/usr/bin/sh',
     '-c',
     `ldapmodify ${addOption} -Y EXTERNAL -H ` +
-    `ldapi://%2fvar%2frun%2fslapd-${serverId}.socket `
+    `ldapi://%2fdata%2frun%2fslapd-${serverId}.socket `
   ];
   const cmd_copy = [
     '/usr/bin/sh',
     '-c',
     `ldapmodify ${addOption} -Y EXTERNAL -H ` +
-    `ldapi://%2fvar%2frun%2fslapd-${serverId}.socket\n`,
+    `ldapi://%2fdata%2frun%2fslapd-${serverId}.socket\n`,
     logLdifData  // hides userpassword value from console log
   ];
 
@@ -869,9 +869,9 @@ export function createLdapEntry (serverId, ldifArray, createEntryCallback) {
 // Retrieve all objectClasses along with their required and optional attributes.
 export function getAllObjectClasses (serverId, allOcCallback) {
   const cmd = [
-    'dsconf',
+    'podman-389-ds.sh', 'dsconf',
     '--json',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     'schema',
     'objectclasses',
     'list'
@@ -901,9 +901,9 @@ export function getAllObjectClasses (serverId, allOcCallback) {
 // Retrieve the list of attributes that are single-valued.
 export function getSingleValuedAttributes (serverId, svCallback) {
   const cmd = [
-    'dsconf',
+    'podman-389-ds.sh', 'dsconf',
     '--json',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     'schema',
     'attributetypes',
     'list'
@@ -931,9 +931,9 @@ export function getSingleValuedAttributes (serverId, svCallback) {
 // Retrieve the names and OID of all attributes.
 export function getAttributesNameAndOid (serverId, attrCallback) {
   const cmd = [
-    'dsconf',
+    'podman-389-ds.sh', 'dsconf',
     '--json',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     'schema',
     'attributetypes',
     'list'
@@ -962,7 +962,7 @@ export function deleteLdapData (serverId, entryDN, numSubordinates, deleteCallba
     '-Y',
     'EXTERNAL',
     '-H',
-    'ldapi://%2fvar%2frun%2fslapd-' + serverId + '.socket',
+    'ldapi://%2fdata%2frun%2fslapd-' + serverId + '.socket',
     entryDN
   ];
   if (numSubordinates > 0) {

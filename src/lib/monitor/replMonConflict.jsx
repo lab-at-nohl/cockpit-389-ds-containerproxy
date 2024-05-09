@@ -111,7 +111,7 @@ export class ReplMonConflict extends React.Component {
 
     convertConflict () {
         this.setState({ modalSpinning: true });
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "convert", this.state.conflictEntry, "--new-rdn=" + this.state.convertRDN];
         log_cmd("convertConflict", "convert conflict entry", cmd);
         cockpit
@@ -139,7 +139,7 @@ export class ReplMonConflict extends React.Component {
 
     swapConflict () {
         this.setState({ modalSpinning: true });
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "swap", this.state.conflictEntry];
         log_cmd("swapConflict", "swap in conflict entry", cmd);
         cockpit
@@ -167,7 +167,7 @@ export class ReplMonConflict extends React.Component {
 
     deleteConflict () {
         this.setState({ modalSpinning: true });
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "delete", this.state.conflictEntry];
 
         log_cmd("deleteConflict", "Delete conflict entry", cmd);
@@ -195,7 +195,7 @@ export class ReplMonConflict extends React.Component {
     }
 
     resolveConflict (dn) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "compare", dn];
         log_cmd("resolveConflict", "Compare conflict entry with valid entry", cmd);
         cockpit
@@ -240,7 +240,7 @@ export class ReplMonConflict extends React.Component {
     }
 
     convertGlue () {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "convert-glue", this.state.glueEntry];
         log_cmd("convertGlue", "Convert glue entry to normal entry", cmd);
         cockpit
@@ -273,7 +273,7 @@ export class ReplMonConflict extends React.Component {
     }
 
     deleteGlue () {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "delete-glue", this.state.glueEntry];
         log_cmd("deleteGlue", "Delete glue entry", cmd);
         cockpit

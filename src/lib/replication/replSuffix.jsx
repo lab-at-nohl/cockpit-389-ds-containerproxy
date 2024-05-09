@@ -209,7 +209,7 @@ export class ReplSuffix extends React.Component {
 
         // Now enable replication
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'replication', 'enable', '--suffix=' + this.props.suffix,
             '--role=' + this.state.enableRole
         ];
@@ -262,7 +262,7 @@ export class ReplSuffix extends React.Component {
         this.setState({
             modalSpinning: true
         });
-        const cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket', 'replication', 'disable', '--suffix=' + this.props.suffix];
+        const cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket', 'replication', 'disable', '--suffix=' + this.props.suffix];
         log_cmd('disableReplication', 'Disable replication', cmd);
         cockpit
                 .spawn(cmd, { superuser: true, err: "message" })

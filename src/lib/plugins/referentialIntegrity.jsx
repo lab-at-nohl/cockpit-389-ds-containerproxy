@@ -342,9 +342,9 @@ class ReferentialIntegrity extends React.Component {
         const updateDelay = this.state.updateDelay.toString();
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "referential-integrity",
             "set",
@@ -439,9 +439,9 @@ class ReferentialIntegrity extends React.Component {
         } else {
             let membershipAttrList = [];
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "referential-integrity",
                 "config-entry",
@@ -563,9 +563,9 @@ class ReferentialIntegrity extends React.Component {
         } = this.state;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "referential-integrity",
             "config-entry",
@@ -636,9 +636,9 @@ class ReferentialIntegrity extends React.Component {
 
     deleteConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "referential-integrity",
             "config-entry",

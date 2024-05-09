@@ -73,7 +73,7 @@ class USNPlugin extends React.Component {
 
     loadSuffixList () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "suffix", "list", "--suffix"
         ];
         log_cmd("loadSuffixList", "Get a list of all the suffixes", cmd);
@@ -98,9 +98,9 @@ class USNPlugin extends React.Component {
         const { serverId, addNotification, toggleLoadingHandler } = this.props;
         const new_status = this.state.globalMode ? "off" : "on";
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + serverId + ".socket",
             "plugin",
             "usn",
             "global",
@@ -145,9 +145,9 @@ class USNPlugin extends React.Component {
             pluginEnabled = true;
         }
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config",
             "get",
             "nsslapd-entryusn-global"
@@ -191,9 +191,9 @@ class USNPlugin extends React.Component {
             this.props.addNotification("warning", "Suffix is required.");
         } else {
             let cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "usn",
                 "cleanup"

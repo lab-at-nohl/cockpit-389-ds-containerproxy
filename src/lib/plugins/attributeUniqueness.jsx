@@ -253,9 +253,9 @@ class AttributeUniqueness extends React.Component {
         this.props.pluginListHandler();
         // Get all the attributes and matching rules now
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "attr-uniq",
             "list"
@@ -304,9 +304,9 @@ class AttributeUniqueness extends React.Component {
             let configAttrNamesList = [];
             let configSubtreesList = [];
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "attr-uniq",
                 "show",
@@ -409,9 +409,9 @@ class AttributeUniqueness extends React.Component {
         } = this.state;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "attr-uniq",
             action,
@@ -536,9 +536,9 @@ class AttributeUniqueness extends React.Component {
 
     deleteConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "attr-uniq",
             "delete",

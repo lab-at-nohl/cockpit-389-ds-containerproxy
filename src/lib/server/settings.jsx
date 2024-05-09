@@ -437,7 +437,7 @@ export class ServerSettings extends React.Component {
             rootDNReloading: true,
         });
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'config', 'replace'
         ];
 
@@ -469,7 +469,7 @@ export class ServerSettings extends React.Component {
 
     reloadRootDN() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("reloadConfig", "Reload Directory Manager configuration", cmd);
@@ -511,7 +511,7 @@ export class ServerSettings extends React.Component {
             diskMonReloading: true,
         });
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'config', 'replace'
         ];
         for (const attr of disk_attrs) {
@@ -550,7 +550,7 @@ export class ServerSettings extends React.Component {
 
     reloadDiskMonitoring() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("reloadDiskMonitoring", "Reload Disk Monitoring configuration", cmd);
@@ -602,7 +602,7 @@ export class ServerSettings extends React.Component {
             advReloading: true,
         });
         const cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'config', 'replace'
         ];
         for (const attr of adv_attrs) {
@@ -641,7 +641,7 @@ export class ServerSettings extends React.Component {
 
     reloadAdvanced() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("reloadAdvanced", "Reload Advanced configuration", cmd);
@@ -743,7 +743,7 @@ export class ServerSettings extends React.Component {
             configReloading: true,
         });
         const cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'config', 'replace'
         ];
 
@@ -777,7 +777,7 @@ export class ServerSettings extends React.Component {
 
     reloadConfig() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("reloadConfig", "Reload server configuration", cmd);

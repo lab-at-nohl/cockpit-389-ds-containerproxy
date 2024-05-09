@@ -407,9 +407,9 @@ export class Schema extends React.Component {
         }
         this.toggleLoading("allSchema");
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "get_syntaxes"
@@ -434,9 +434,9 @@ export class Schema extends React.Component {
 
     loadSchemaData(initialLoading) {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "list"
         ];
@@ -560,9 +560,9 @@ export class Schema extends React.Component {
             });
         } else {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "schema",
                 "objectclasses",
                 "query",
@@ -665,9 +665,9 @@ export class Schema extends React.Component {
 
     doDeleteOC() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "objectclasses",
             "remove",
@@ -716,9 +716,9 @@ export class Schema extends React.Component {
             this.props.addNotification("warning", "ObjectClass Name is required.");
         } else {
             let cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "schema",
                 "objectclasses",
                 action,
@@ -824,9 +824,9 @@ export class Schema extends React.Component {
             });
         } else {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "schema",
                 "attributetypes",
                 "query",
@@ -959,9 +959,9 @@ export class Schema extends React.Component {
 
     doDeleteAttr() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "remove",
@@ -1017,9 +1017,9 @@ export class Schema extends React.Component {
         const subMR = atSubMr;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "add",
@@ -1123,9 +1123,9 @@ export class Schema extends React.Component {
         let subMR = atSubMr;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "replace",

@@ -360,7 +360,7 @@ export class SearchDatabase extends React.Component {
                     let entryStateIcon = "";
 
                     entryStateIcon = <LockIcon className="ds-pf-blue-color"/>
-                    const cmd = ["dsidm", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                    const cmd = ["podman-389-ds.sh", "dsidm", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "-b", info.dn, info.isRole ? "role" : "account", "entry-status", info.dn];
                     log_cmd("processResults", "Checking if entry is activated", cmd);
                     cockpit
@@ -567,7 +567,7 @@ export class SearchDatabase extends React.Component {
             operationType
         } = this.state;
 
-        const cmd = ["dsidm", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsidm", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "-b", entryDn, entryType, operationType, entryDn];
         log_cmd("handleLockUnlockEntry", `${operationType} entry`, cmd);
         cockpit

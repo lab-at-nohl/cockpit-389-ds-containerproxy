@@ -265,9 +265,9 @@ class ManagedEntries extends React.Component {
 
     loadConfigs() {
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "managed-entries",
             "list",
@@ -305,9 +305,9 @@ class ManagedEntries extends React.Component {
                     // Get the Definitions
                     //
                     cmd = [
-                        "dsconf",
+                        "podman-389-ds.sh", "dsconf",
                         "-j",
-                        "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "plugin",
                         "managed-entries",
                         "list",
@@ -368,9 +368,9 @@ class ManagedEntries extends React.Component {
             });
         } else {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "managed-entries",
                 "template",
@@ -564,9 +564,9 @@ class ManagedEntries extends React.Component {
             });
         } else {
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "managed-entries",
                 "config",
@@ -631,9 +631,9 @@ class ManagedEntries extends React.Component {
 
     deleteDefConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "managed-entries",
             "config",
@@ -679,9 +679,9 @@ class ManagedEntries extends React.Component {
         const { configName, originScope, originFilter, managedBase, managedTemplate } = this.state;
 
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "managed-entries",
             "config",
@@ -741,9 +741,9 @@ class ManagedEntries extends React.Component {
         const { templateDN, templateRDNAttr, templateStaticAttr, templateMappedAttr } = this.state;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "managed-entries",
             "template",
@@ -812,9 +812,9 @@ class ManagedEntries extends React.Component {
         const { templateDN } = this.state;
 
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "managed-entries",
             "template",
@@ -858,9 +858,9 @@ class ManagedEntries extends React.Component {
 
     getAttributes() {
         const attr_cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "list"
@@ -975,9 +975,9 @@ class ManagedEntries extends React.Component {
         } = this.state;
 
         const specificPluginCMD = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "managed-entries",
             "set",

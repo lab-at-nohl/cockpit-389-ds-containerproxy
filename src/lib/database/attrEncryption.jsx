@@ -90,7 +90,7 @@ export class AttrEncryption extends React.Component {
 
         // Add the new encrypted attr
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "attr-encrypt", "--add-attr=" + this.state.addAttr, this.props.suffix
         ];
         log_cmd("addEncryptedAttr", "Delete suffix referral", cmd);
@@ -126,7 +126,7 @@ export class AttrEncryption extends React.Component {
             modalSpinning: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "attr-encrypt", "--del-attr=" + this.state.delAttr, this.props.suffix
         ];
         log_cmd("delEncryptedAttr", "Delete encrypted attribute", cmd);

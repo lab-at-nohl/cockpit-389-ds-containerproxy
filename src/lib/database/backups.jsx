@@ -259,7 +259,7 @@ export class Backups extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "import", this.state.ldifSuffix, this.state.ldifName, "--encrypted"
         ];
         log_cmd("importLDIF", "Importing LDIF", cmd);
@@ -287,7 +287,7 @@ export class Backups extends React.Component {
             modalSpinning: true
         });
         const cmd = [
-            "dsctl", this.props.serverId,
+            "podman-389-ds.sh", "dsctl", this.props.serverId,
             "ldifs", "--delete", this.state.ldifName
         ];
         log_cmd("deleteLDIF", "Deleting LDIF", cmd);
@@ -326,7 +326,7 @@ export class Backups extends React.Component {
 
     doBackup () {
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backup", "create"
         ];
         if (this.state.backupName != "") {
@@ -351,7 +351,7 @@ export class Backups extends React.Component {
                     this.props.reload();
                     this.closeBackupModal();
                     const cmd = [
-                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "config", "get", "nsslapd-bakdir"
                     ];
                     log_cmd("doBackup", "Get the backup directory", cmd);
@@ -402,7 +402,7 @@ export class Backups extends React.Component {
             modalSpinning: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backup", "restore", this.state.backupName
         ];
         log_cmd("restoreBackup", "Restoring server", cmd);
@@ -430,7 +430,7 @@ export class Backups extends React.Component {
         this.setState({ modalSpinning: true });
 
         const cmd = [
-            "dsctl", this.props.serverId, "backups", "--delete", this.state.backupName
+            "podman-389-ds.sh", "dsctl", this.props.serverId, "backups", "--delete", this.state.backupName
         ];
         log_cmd("deleteBackup", "Deleting backup", cmd);
         cockpit
@@ -514,7 +514,7 @@ export class Backups extends React.Component {
 
         // Do import
         const export_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "export", this.state.ldifSuffix, "--encrypted", "--ldif=" + this.state.ldifName
         ];
 
@@ -536,7 +536,7 @@ export class Backups extends React.Component {
                         showExportModal: false,
                     });
                     const cmd = [
-                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "config", "get", "nsslapd-ldifdir"
                     ];
                     log_cmd("doExport", "Get the backup directory", cmd);

@@ -251,7 +251,7 @@ export class Suffix extends React.Component {
     importLDIF () {
         // Do import
         const import_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "import", this.props.suffix, this.state.importLDIFName, "--encrypted"
         ];
 
@@ -346,7 +346,7 @@ export class Suffix extends React.Component {
 
         // Do Export
         const export_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "export", this.props.suffix, "--ldif=" + this.state.ldifLocation
         ];
 
@@ -371,7 +371,7 @@ export class Suffix extends React.Component {
                         showExportModal: false,
                     });
                     const cmd = [
-                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "config", "get", "nsslapd-ldifdir"
                     ];
                     log_cmd("doExport", "Get the backup directory", cmd);
@@ -434,7 +434,7 @@ export class Suffix extends React.Component {
         this.setState({
             modalSpinning: true
         });
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "index", "reindex", "--wait", this.props.suffix];
         log_cmd("doReindex", "Reindex all attributes", cmd);
         cockpit
@@ -481,7 +481,7 @@ export class Suffix extends React.Component {
     createSubSuffix() {
         // Create a new suffix
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "create", "--be-name", this.state.subSuffixBeName,
             "--suffix=" + this.state.subSuffixValue + "," + this.props.suffix,
             "--parent-suffix=" + this.props.suffix
@@ -548,7 +548,7 @@ export class Suffix extends React.Component {
             linkSaving: true
         });
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "chaining", "link-create",
             "--suffix=" + this.state.createLinkSuffix + "," + this.props.suffix,
             "--server-url=" + this.state.createNsfarmserverurl,
@@ -741,7 +741,7 @@ export class Suffix extends React.Component {
             modalSpinning: true
         })
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "delete", this.props.suffix
         ];
         log_cmd("doDelete", "Delete database", cmd);
@@ -770,7 +770,7 @@ export class Suffix extends React.Component {
     saveSuffixConfig() {
         console.log("Save suffix config: ", this.props.suffix);
         let cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'backend', 'suffix', 'set', this.props.suffix
         ];
         let requireRestart = false;

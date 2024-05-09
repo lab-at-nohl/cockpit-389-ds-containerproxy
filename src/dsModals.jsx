@@ -242,8 +242,8 @@ export class CreateInstanceModal extends React.Component {
                     }
                     setup_inf = setup_inf.replace("FQDN", data);
                     const setup_file = "/tmp/389-setup-" + new Date().getTime() + ".inf";
-                    const rm_cmd = ["rm", setup_file];
-                    const create_file_cmd = ["touch", setup_file];
+                    const rm_cmd = ["podman-389-ds.sh", "rm", setup_file];
+                    const create_file_cmd = ["podman-389-ds.sh", "touch", setup_file];
                     log_cmd("handleCreateInstance", "Setting FQDN...", create_file_cmd);
                     cockpit
                             .spawn(create_file_cmd, { superuser: true, err: "message" })
@@ -260,7 +260,7 @@ export class CreateInstanceModal extends React.Component {
                                 /*
                                  * We have our new setup file, now set permissions on that setup file before we add sensitive data
                                  */
-                                const chmod_cmd = ["chmod", "600", setup_file];
+                                const chmod_cmd = ["podman-389-ds.sh", "chmod", "600", setup_file];
                                 log_cmd("handleCreateInstance", "Setting initial INF file permissions...", chmod_cmd);
                                 cockpit
                                         .spawn(chmod_cmd, { superuser: true, err: "message" })
@@ -280,7 +280,7 @@ export class CreateInstanceModal extends React.Component {
                                              * Now populate the setup file...
                                              */
                                             const cmd = [
-                                                '/bin/sh', '-c',
+                                                'podman-389-ds.sh', '/bin/sh', '-c',
                                                 '/usr/bin/echo -e \'' + setup_inf + '\' >> ' + setup_file
                                             ];
 
@@ -301,7 +301,7 @@ export class CreateInstanceModal extends React.Component {
                                                         /*
                                                          * Next, create the instance...
                                                          */
-                                                        const cmd = ["dscreate", "-j", "from-file", setup_file];
+                                                        const cmd = ["podman-389-ds.sh", "dscreate", "-j", "from-file", setup_file];
                                                         log_cmd("handleCreateInstance", "Creating instance...", cmd);
                                                         cockpit
                                                                 .spawn(cmd, {
@@ -324,7 +324,7 @@ export class CreateInstanceModal extends React.Component {
                                                                     log_cmd("handleCreateInstance", "Instance creation compelete, remove INF file...", rm_cmd);
                                                                     cockpit.spawn(rm_cmd, { superuser: true });
 
-                                                                    const dm_pw_cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + newServerId + '.socket',
+                                                                    const dm_pw_cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + newServerId + '.socket',
                                                                                        'directory_manager', 'password_change'];
                                                                     const config = {
                                                                         cmd: dm_pw_cmd,
@@ -655,7 +655,7 @@ export class SchemaReloadModal extends React.Component {
             loadingSchemaTask: true
         });
 
-        let cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + serverId + ".socket", "schema", "reload", "--wait"];
+        let cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + serverId + ".socket", "schema", "reload", "--wait"];
         if (reloadSchemaDir !== "") {
             cmd = [...cmd, "--schemadir", reloadSchemaDir];
         }
@@ -869,16 +869,16 @@ export class ManageBackupsModal extends React.Component {
             backupSpinning: true
         });
 
-        const cmd = ["dsctl", "-j", this.props.serverId, "status"];
+        const cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "status"];
         cockpit
                 .spawn(cmd, { superuser: true })
                 .done(status_data => {
                     const status_json = JSON.parse(status_data);
                     if (status_json.running === true) {
                         const cmd = [
-                            "dsconf",
+                            "podman-389-ds.sh", "dsconf",
                             "-j",
-                            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                             "backup",
                             "create"
                         ];
@@ -900,7 +900,7 @@ export class ManageBackupsModal extends React.Component {
                                     this.props.reload();
                                     this.closeBackupModal();
                                     const cmd = [
-                                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                                         "config", "get", "nsslapd-bakdir"
                                     ];
                                     log_cmd("doBackup", "Get the backup directory", cmd);
@@ -936,7 +936,7 @@ export class ManageBackupsModal extends React.Component {
                                     );
                                 });
                     } else {
-                        const cmd = ["dsctl", "-j", this.props.serverId, "db2bak"];
+                        const cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "db2bak"];
                         if (this.state.backupName !== "") {
                             if (bad_file_name(this.state.backupName)) {
                                 this.props.addNotification(
@@ -976,16 +976,16 @@ export class ManageBackupsModal extends React.Component {
         this.setState({
             modalSpinning: true
         });
-        const cmd = ["dsctl", "-j", this.props.serverId, "status"];
+        const cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "status"];
         cockpit
                 .spawn(cmd, { superuser: true })
                 .done(status_data => {
                     const status_json = JSON.parse(status_data);
                     if (status_json.running === true) {
                         const cmd = [
-                            "dsconf",
+                            "podman-389-ds.sh", "dsconf",
                             "-j",
-                            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                             "backup",
                             "restore",
                             this.state.backupName
@@ -1007,7 +1007,7 @@ export class ManageBackupsModal extends React.Component {
                                 });
                     } else {
                         const cmd = [
-                            "dsctl",
+                            "podman-389-ds.sh", "dsctl",
                             "-j",
                             this.props.serverId,
                             "bak2db",
@@ -1041,7 +1041,7 @@ export class ManageBackupsModal extends React.Component {
             modalSpinning: true,
         });
         const cmd = [
-            "dsctl",
+            "podman-389-ds.sh", "dsctl",
             "-j",
             this.props.serverId,
             "backups",

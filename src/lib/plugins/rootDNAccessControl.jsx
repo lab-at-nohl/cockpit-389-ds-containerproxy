@@ -391,9 +391,9 @@ class RootDNAccessControl extends React.Component {
         daysAllowed = daysAllowed.substring(0, daysAllowed.length - 1);
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "root-dn",
             "set",

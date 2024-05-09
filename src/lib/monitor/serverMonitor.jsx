@@ -82,7 +82,7 @@ export class ServerMonitor extends React.Component {
 
     getPorts() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get", "nsslapd-port", "nsslapd-secureport"
         ];
         log_cmd("getPorts", "Get the server port numbers", cmd);

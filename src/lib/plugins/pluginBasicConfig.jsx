@@ -73,9 +73,9 @@ class PluginBasicConfig extends React.Component {
         } = this.props;
         const new_status = this.state.currentPluginEnabled ? "disable" : "enable";
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + serverId + ".socket",
             "plugin",
             cmdName,
             new_status
@@ -90,7 +90,7 @@ class PluginBasicConfig extends React.Component {
                     console.info("savePlugin", "Result", content);
                     pluginListHandler();
                     const successCheckCMD = [
-                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + serverId + ".socket",
+                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + serverId + ".socket",
                         "config", "get", "nsslapd-dynamic-plugins"
                     ];
                     log_cmd("handleSwitchChange", "Get Dynamic Plugins attribute", successCheckCMD);

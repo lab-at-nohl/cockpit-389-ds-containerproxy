@@ -350,7 +350,7 @@ export class CertificateManagement extends React.Component {
             exportFileName += ".pem"
         }
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "export-cert", this.state.exportNickname, "--output-file=" + exportFileName
         ];
         if (this.state.exportDERFormat) {
@@ -473,7 +473,7 @@ export class CertificateManagement extends React.Component {
                     .spawn(create_cert_cmd, { superuser: true, err: "message" })
                     .done(() => {
                         const cmd = [
-                            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                             "security", certType, "add", "--name=" + this.state.certName, "--file=" + certFile
                         ];
                         log_cmd("addCert", "Adding cert (tmp): ", cmd);
@@ -527,7 +527,7 @@ export class CertificateManagement extends React.Component {
         } else {
             // Import existing file into NSS db
             let cmd = [
-                "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "security", certType, "add", "--name=" + this.state.certName
             ];
 
@@ -582,7 +582,7 @@ export class CertificateManagement extends React.Component {
             loading: true,
         });
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "csr", "req", "--name=" + this.state.csrName, "--subject=" + this.state.csrSubject
         ];
         for (const altname of this.state.csrAltNames) {
@@ -636,7 +636,7 @@ export class CertificateManagement extends React.Component {
         }
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "csr", "get", name
         ];
 
@@ -691,7 +691,7 @@ export class CertificateManagement extends React.Component {
             loading: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "certificate", "del", this.state.certName
         ];
         log_cmd("delCert", "Deleting certificate", cmd);
@@ -733,7 +733,7 @@ export class CertificateManagement extends React.Component {
             loading: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "csr", "del", this.state.csrName
         ];
         log_cmd("delCSR", "Deleting CSR", cmd);
@@ -777,7 +777,7 @@ export class CertificateManagement extends React.Component {
             loading: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "key", "del", this.state.keyID
         ];
         log_cmd("delKey", "Deleting key", cmd);
@@ -871,7 +871,7 @@ export class CertificateManagement extends React.Component {
             loading: true,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "certificate", "set-trust-flags", this.state.certName, "--flags=" + this.state.flags
         ];
         log_cmd("doEditCert", "Editing trust flags", cmd);
@@ -1097,7 +1097,7 @@ export class CertificateManagement extends React.Component {
 
     reloadCerts () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "certificate", "list",
         ];
         log_cmd("reloadCerts", "Load certificates", cmd);
@@ -1132,7 +1132,7 @@ export class CertificateManagement extends React.Component {
 
     reloadCSRs () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "csr", "list",
         ];
         log_cmd("reloadCSRs", "Reload CSRs", cmd);
@@ -1164,7 +1164,7 @@ export class CertificateManagement extends React.Component {
     reloadOrphanKeys () {
         // Set loaded: true
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "key", "list", "--orphan"
         ];
         log_cmd("reloadOrphanKeys", "Reload Orphan Keys", cmd);
@@ -1198,7 +1198,7 @@ export class CertificateManagement extends React.Component {
 
     reloadCACerts () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "ca-certificate", "list",
         ];
         log_cmd("reloadCACerts", "Load certificates", cmd);

@@ -192,7 +192,7 @@ export class Monitor extends React.Component {
 
     loadSuffixTree(fullReset) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "get-tree",
         ];
         log_cmd("getTree", "Start building the suffix tree", cmd);
@@ -428,7 +428,7 @@ export class Monitor extends React.Component {
             });
         }
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get", "nsslapd-auditlog", "nsslapd-accesslog", "nsslapd-errorlog",
             "nsslapd-auditfaillog", "nsslapd-securitylog"
         ];
@@ -450,7 +450,7 @@ export class Monitor extends React.Component {
     loadReplicatedSuffixes() {
         // Load replicated suffix to populate the dropdown select list
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "list"
         ];
         log_cmd("loadReplicatedSuffixes", "Load replication suffixes", cmd);
@@ -471,7 +471,7 @@ export class Monitor extends React.Component {
 
     loadMonitorLDBM() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "ldbm"
         ];
         log_cmd("loadMonitorLDBM", "Load database monitor", cmd);
@@ -487,7 +487,7 @@ export class Monitor extends React.Component {
 
     loadMonitorServer() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "server"
         ];
         log_cmd("loadMonitorServer", "Load server monitor", cmd);
@@ -506,7 +506,7 @@ export class Monitor extends React.Component {
             serverLoading: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "server"
         ];
         log_cmd("reloadServer", "Load server monitor", cmd);
@@ -523,7 +523,7 @@ export class Monitor extends React.Component {
 
     loadMonitorSNMP() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "snmp"
         ];
         log_cmd("loadMonitorSNMP", "Load snmp monitor", cmd);
@@ -539,7 +539,7 @@ export class Monitor extends React.Component {
 
     loadDiskSpace() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "disk"
         ];
         log_cmd("loadDiskSpace", "Load disk space info", cmd);
@@ -559,7 +559,7 @@ export class Monitor extends React.Component {
 
     reloadDisks () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "disk"
         ];
         log_cmd("reloadDisks", "Reload disk stats", cmd);
@@ -579,7 +579,7 @@ export class Monitor extends React.Component {
 
     reloadSNMP() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "snmp"
         ];
         log_cmd("reloadSNMP", "Load snmp monitor", cmd);
@@ -599,7 +599,7 @@ export class Monitor extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "monitor", "chaining", suffix
         ];
         log_cmd("loadMonitorChaining", "Load suffix monitor", cmd);
@@ -630,7 +630,7 @@ export class Monitor extends React.Component {
     }
 
     loadCleanTasks(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-tasks", "list-cleanruv-tasks", "--suffix=" + replSuffix];
         log_cmd("loadCleanTasks", "Load clean tasks", cmd);
         cockpit
@@ -653,7 +653,7 @@ export class Monitor extends React.Component {
     }
 
     loadAbortTasks(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-tasks", "list-abortruv-tasks", "--suffix=" + replSuffix];
         log_cmd("loadAbortCleanTasks", "Load abort tasks", cmd);
         cockpit
@@ -676,7 +676,7 @@ export class Monitor extends React.Component {
     }
 
     loadConflicts(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "list", replSuffix];
         log_cmd("loadConflicts", "Load conflict entries", cmd);
         cockpit
@@ -700,7 +700,7 @@ export class Monitor extends React.Component {
     }
 
     loadGlues(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-conflict", "list-glue", replSuffix];
         log_cmd("loadGlues", "Load glue entries", cmd);
         cockpit
@@ -727,7 +727,7 @@ export class Monitor extends React.Component {
 
     loadDSRC() {
         // Load dsrc replication report configuration
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "display"];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "display"];
         log_cmd("loadDSRC", "Check for replication monitor configurations in the .dsrc file", dsrc_cmd);
         cockpit
                 .spawn(dsrc_cmd, { superuser: true, err: "message" })
@@ -770,7 +770,7 @@ export class Monitor extends React.Component {
     }
 
     loadWinsyncAgmts(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "winsync-status", "--suffix=" + replSuffix];
         log_cmd("loadWinsyncAgmts", "Load winsync agmt status", cmd);
         cockpit
@@ -803,7 +803,7 @@ export class Monitor extends React.Component {
         }
 
         const suffix = suffixList[idx];
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "status", "--suffix=" + suffix];
         log_cmd("gatherAllReplicaHosts", "Get replication hosts for repl report", cmd);
         cockpit
@@ -852,7 +852,7 @@ export class Monitor extends React.Component {
             });
 
             // Now load the agmts
-            const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "replication", "status", "--suffix=" + treeViewItem.suffix];
             log_cmd("onHandleLoadMonitorReplication", "Load replication suffix info", cmd);
             cockpit
@@ -890,7 +890,7 @@ export class Monitor extends React.Component {
     }
 
     reloadReplAgmts(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "status", "--suffix=" + replSuffix];
         log_cmd("reloadReplAgmts", "Load replication agmts", cmd);
         cockpit
@@ -907,7 +907,7 @@ export class Monitor extends React.Component {
     }
 
     reloadReplWinsyncAgmts(replSuffix) {
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "winsync-status", "--suffix=" + replSuffix];
         log_cmd("reloadReplWinsyncAgmts", "Load winysnc agmts", cmd);
         cockpit

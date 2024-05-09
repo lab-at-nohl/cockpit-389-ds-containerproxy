@@ -274,9 +274,9 @@ class PAMPassthroughAuthentication extends React.Component {
             firstLoad: false
         });
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "pam-pass-through-auth",
             "list",
@@ -332,9 +332,9 @@ class PAMPassthroughAuthentication extends React.Component {
             let pamExcludeSuffixList = [];
             let pamIncludeSuffixList = [];
             const cmd = [
-                "dsconf",
+                "podman-389-ds.sh", "dsconf",
                 "-j",
-                "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "plugin",
                 "pam-pass-through-auth",
                 "config",
@@ -465,9 +465,9 @@ class PAMPassthroughAuthentication extends React.Component {
 
     deletePAMConfig() {
         const cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "pam-pass-through-auth",
             "config",
@@ -536,9 +536,9 @@ class PAMPassthroughAuthentication extends React.Component {
         } = this.state;
 
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "plugin",
             "pam-pass-through-auth",
             "config",

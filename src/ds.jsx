@@ -20,7 +20,7 @@ import {
     DropdownToggle,
     DropdownItem,
     DropdownPosition,
-    DropdownSeparator,
+   /* DropdownSeparator, */
     Grid, GridItem,
     FormSelect,
     FormSelectOption,
@@ -49,7 +49,7 @@ const staticStates = {
     noInsts: (
         <TextContent>
             <Text className="ds-margin-top-xlg ds-indent-md" component={TextVariants.h2}>
-                There are no Directory Server instances to manage
+                There are no Directory Server Containers to manage
             </Text>
         </TextContent>
     ),
@@ -213,7 +213,7 @@ export class DSInstance extends React.Component {
 
     setServerId(serverId, action) {
         // First we need to check if the instance is alive and well
-        const cmd = ["dsctl", "-j", serverId, "status"];
+        const cmd = ["podman-389-ds.sh", "dsctl", "-j", serverId, "status"];
         log_cmd("setServerId", "Test if instance is running ", cmd);
         cockpit
                 .spawn(cmd, { superuser: true, err: "message" })
@@ -223,7 +223,7 @@ export class DSInstance extends React.Component {
                         this.updateProgress(25);
 
                         const cfg_cmd = [
-                            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + serverId + ".socket",
+                            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + serverId + ".socket",
                             "config", "get"
                         ];
                         log_cmd("setServerId", "Load server configuration", cfg_cmd);
@@ -247,9 +247,9 @@ export class DSInstance extends React.Component {
                                     }
 
                                     const cmd = [
-                                        "dsconf",
+                                        "podman-389-ds.sh", "dsconf",
                                         "-j",
-                                        "ldapi://%2fvar%2frun%2fslapd-" + serverId + ".socket",
+                                        "ldapi://%2fdata%2frun%2fslapd-" + serverId + ".socket",
                                         "backend",
                                         "suffix",
                                         "list",
@@ -389,7 +389,7 @@ export class DSInstance extends React.Component {
                 wasActiveList: []
             },
             () => {
-                const cmd = ["dsctl", "-l", "-j"];
+                const cmd = ["podman-389-ds.sh", "dsctl", "-l", "-j"];
                 log_cmd(
                     "loadInstanceList",
                     "Load the instance list select",
@@ -445,7 +445,7 @@ export class DSInstance extends React.Component {
     }
 
     loadBackups() {
-        let cmd = ["dsctl", "-j", this.state.serverId, "backups"];
+        let cmd = ["podman-389-ds.sh", "dsctl", "-j", this.state.serverId, "backups"];
         log_cmd("loadBackups", "Load Backups", cmd);
         cockpit.spawn(cmd, { superuser: true, err: "message" }).done(content => {
             this.updateProgress(25);
@@ -455,7 +455,7 @@ export class DSInstance extends React.Component {
                 rows.push([row[0], row[1], row[2]]);
             }
             // Get the server version from the monitor
-            cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.state.serverId + ".socket", "monitor", "server"];
+            cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.state.serverId + ".socket", "monitor", "server"];
             log_cmd("loadBackups", "Get the server version", cmd);
             cockpit
                     .spawn(cmd, { superuser: true, err: "message" }).done(content => {
@@ -500,7 +500,7 @@ export class DSInstance extends React.Component {
             loadingOperate: true
         });
 
-        const cmd = ["dsctl", "-j", this.state.serverId, "remove", "--do-it"];
+        const cmd = ["podman-389-ds.sh", "dsctl", "-j", this.state.serverId, "remove", "--do-it"];
         log_cmd("removeInstance", `Remove the instance`, cmd);
         cockpit
                 .spawn(cmd, { superuser: true, err: "message" })
@@ -524,7 +524,7 @@ export class DSInstance extends React.Component {
             loadingOperate: true
         });
 
-        const cmdStatus = ["dsctl", "-j", this.state.serverId, "status"];
+        const cmdStatus = ["podman-389-ds.sh", "dsctl", "-j", this.state.serverId, "status"];
         log_cmd("operateInstance", `Check instance status`, cmdStatus);
         cockpit
                 .spawn(cmdStatus, { superuser: true, err: "message" })
@@ -545,7 +545,7 @@ export class DSInstance extends React.Component {
                             }
                         });
                     } else {
-                        const cmd = ["dsctl", "-j", this.state.serverId, action];
+                        const cmd = ["podman-389-ds.sh", "dsctl", "-j", this.state.serverId, action];
                         log_cmd("operateInstance", `Do ${action} the instance`, cmd);
                         cockpit
                                 .spawn(cmd, { superuser: true, err: "message" })
@@ -658,13 +658,13 @@ export class DSInstance extends React.Component {
             <DropdownItem id="reload-schema-ds" key="reload" component="button" onClick={() => (this.openSchemaReloadModal())}>
                 Reload Schema Files
             </DropdownItem>,
-            <DropdownSeparator key="separator" />,
+           /* <DropdownSeparator key="separator" />,
             <DropdownItem id="remove-ds" key="remove" component="button" onClick={() => (this.showDeleteConfirm())}>
                 Remove This Instance
             </DropdownItem>,
             <DropdownItem id="create-ds" key="create" component="button" onClick={() => (this.openCreateInstanceModal())}>
                 Create New Instance
-            </DropdownItem>
+            </DropdownItem> */
         ];
 
         let mainContent = "";
@@ -694,9 +694,9 @@ export class DSInstance extends React.Component {
                         <Button
                             id="no-inst-create-btn"
                             variant="primary"
-                            onClick={() => (this.openCreateInstanceModal())}
+                            onClick={() => (/* this.openCreateInstanceModal() */ window.location.reload())}
                         >
-                            Create New Instance
+                            Reload 389-ds Cockpit
                         </Button>
                     </p>
                 </div>

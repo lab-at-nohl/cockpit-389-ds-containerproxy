@@ -200,7 +200,7 @@ export class ReplMonitor extends React.Component {
         this.setState({
             loadingDSRC: true,
         });
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "display"];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "display"];
         log_cmd("loadDSRC", "Check for replication monitor configurations in the .dsrc file", dsrc_cmd);
         cockpit
                 .spawn(dsrc_cmd, { superuser: true, err: "message" })
@@ -243,7 +243,7 @@ export class ReplMonitor extends React.Component {
 
     componentDidMount() {
         if (this.state.initCreds) {
-            const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                 "config", "get", "nsslapd-port", "nsslapd-localhost", "nsslapd-rootdn"];
             log_cmd("ReplMonitor", "add credentials during componentDidMount", cmd);
             cockpit
@@ -675,7 +675,7 @@ export class ReplMonitor extends React.Component {
 
     overwriteDSRC () {
         // Get current DSRC Settings
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "display"];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "display"];
         log_cmd("overwriteDSRC", "gather conns and aliases from .dsrc file", dsrc_cmd);
         cockpit
                 .spawn(dsrc_cmd, { superuser: true, err: "message" })
@@ -683,8 +683,8 @@ export class ReplMonitor extends React.Component {
                     const content = JSON.parse(dsrc_content);
                     let dsrcCreds = [];
                     let dsrcAliases = [];
-                    let deleteCmd = ["dsctl", "-j", this.props.serverId, "dsrc", "repl-mon"];
-                    let addCmd = ["dsctl", "-j", this.props.serverId, "dsrc", "repl-mon"];
+                    let deleteCmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "repl-mon"];
+                    let addCmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "repl-mon"];
 
                     // Gather the names of the replica connections and aliases
                     if ("repl-monitor-connections" in content) {
@@ -835,9 +835,9 @@ export class ReplMonitor extends React.Component {
 
         let buffer = "";
         let cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication",
             "monitor"
         ];
@@ -1127,7 +1127,7 @@ export class ReplMonitor extends React.Component {
     }
 
     deleteDSRCCred () {
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--del-conn=" + this.state.connName];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--del-conn=" + this.state.connName];
 
         this.setState({
             loadingDSRC: true,
@@ -1153,7 +1153,7 @@ export class ReplMonitor extends React.Component {
     }
 
     deleteDSRCAlias () {
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--del-alias=" + this.state.aliasName];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--del-alias=" + this.state.aliasName];
 
         this.setState({
             loadingDSRC: true,
@@ -1187,7 +1187,7 @@ export class ReplMonitor extends React.Component {
             connCred
         } = this.state;
         const conn = connName + ":" + connHostname + ":" + connPort + ":" + connBindDN + ":" + connCred;
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--add-conn=" + conn];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--add-conn=" + conn];
 
         this.setState({
             loadingDSRC: true,
@@ -1218,7 +1218,7 @@ export class ReplMonitor extends React.Component {
 
     addDSRCAlias() {
         const alias = this.state.aliasName + ":" + this.state.aliasHostname + ":" + this.state.aliasPort;
-        const dsrc_cmd = ["dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--add-alias=" + alias];
+        const dsrc_cmd = ["podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "dsrc", "repl-mon", "--add-alias=" + alias];
 
         this.setState({
             loadingDSRC: true,

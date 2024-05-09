@@ -290,7 +290,7 @@ export class LDAPEditor extends React.Component {
             isTreeViewAction
         } = this.state;
 
-        const cmd = ["dsidm", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsidm", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "-b", entryDn, entryType, operationType, entryDn];
         log_cmd("handleLockUnlockEntry", `${operationType} entry`, cmd);
         cockpit
@@ -339,9 +339,9 @@ export class LDAPEditor extends React.Component {
 
     getAttributes(callbackFunc) {
         const attr_cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "list"
@@ -626,7 +626,7 @@ export class LDAPEditor extends React.Component {
                     }
                 });
                 let entryState = "";
-                const cmd = ["dsidm", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                const cmd = ["podman-389-ds.sh", "dsidm", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                     "-b", entryDn, isRole ? "role" : "account", "entry-status", entryDn];
                 log_cmd("handleCollapse", "Checking if entry is activated", cmd);
                 cockpit

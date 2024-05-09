@@ -163,7 +163,7 @@ export class VLVIndexes extends React.Component {
     createSortIndex(index) {
         const index_value = index.join(' ');
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "vlv-index", "add-index", "--parent-name=" + this.state.createIndexParent,
             "--index-name=" + this.state.createIndexParent + " - " + index_value,
             "--sort=" + index_value, this.props.suffix
@@ -222,7 +222,7 @@ export class VLVIndexes extends React.Component {
 
     deleteSortIndex() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "vlv-index", "del-index", "--parent-name=" + this.state.deleteIndexParent,
             "--sort=" + this.state.deleteIndexName, this.props.suffix
         ];
@@ -266,7 +266,7 @@ export class VLVIndexes extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "vlv-index", "add-search",
             "--name=" + this.state.vlvName,
             "--search-base=" + this.state.vlvBase,
@@ -319,7 +319,7 @@ export class VLVIndexes extends React.Component {
             modalSpinning: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "vlv-index", "del-search", "--name=" + this.state.deleteVLVName, this.props.suffix
         ];
         log_cmd("deleteVLV", "delete LV search and indexes", cmd);
@@ -366,7 +366,7 @@ export class VLVIndexes extends React.Component {
             modalSpinning: true
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "vlv-index", "reindex", "--parent-name=" + this.state.reindexVLVName, this.props.suffix
         ];
         log_cmd("reindexVLV", "reindex VLV indexes", cmd);

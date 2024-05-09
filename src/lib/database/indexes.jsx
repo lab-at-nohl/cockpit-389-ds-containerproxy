@@ -157,7 +157,7 @@ export class SuffixIndexes extends React.Component {
     loadIndexes () {
         // Get all the attributes and matching rules now
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema", "matchingrules", "list"
         ];
         log_cmd("loadIndexes (suffix config)", "Get matching rules", cmd);
@@ -173,7 +173,7 @@ export class SuffixIndexes extends React.Component {
                     }
 
                     const idx_cmd = [
-                        "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                        "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                         "backend", "index", "list", "--just-names", this.props.suffix
                     ];
                     log_cmd("loadIndexes (suffix config)", "Get current index list", idx_cmd);
@@ -183,7 +183,7 @@ export class SuffixIndexes extends React.Component {
                                 const idxContent = JSON.parse(content);
                                 const indexList = idxContent.items;
                                 const attr_cmd = [
-                                    "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                                    "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                                     "schema", "attributetypes", "list"
                                 ];
                                 log_cmd("loadIndexes (suffix config)", "Get attrs", attr_cmd);
@@ -319,7 +319,7 @@ export class SuffixIndexes extends React.Component {
 
     saveIndex() {
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "index", "add", "--attr=" + this.state.indexName[0],
             this.props.suffix,
         ];
@@ -427,7 +427,7 @@ export class SuffixIndexes extends React.Component {
 
     reindexAttr(attr) {
         const reindex_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "index", "reindex", "--wait", "--attr=" + attr, this.props.suffix,
         ];
 
@@ -466,7 +466,7 @@ export class SuffixIndexes extends React.Component {
         const origMRS = this.state._mrs;
         const newMRS = this.state.mrs;
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "index", "set", "--attr=" + this.state.indexName,
             this.props.suffix,
         ];
@@ -598,7 +598,7 @@ export class SuffixIndexes extends React.Component {
 
     deleteIndex() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "index", "delete", "--attr=" + this.state.deleteAttrName,
             this.props.suffix,
         ];

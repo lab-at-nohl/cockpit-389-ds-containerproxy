@@ -95,7 +95,7 @@ export class Replication extends React.Component {
         this.setState({
             clLoading: true
         });
-        const cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket', 'replication', 'get-changelog'];
+        const cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket', 'replication', 'get-changelog'];
         log_cmd("reloadChangelog", "Reload the changelog", cmd);
         cockpit
                 .spawn(cmd, { superuser: true, err: "message" })
@@ -177,7 +177,7 @@ export class Replication extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "backend", "get-tree",
         ];
         log_cmd("loadSuffixTree", "Start building the suffix tree", cmd);
@@ -342,7 +342,7 @@ export class Replication extends React.Component {
             disabled: true,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-agmt", "list", "--suffix", suffix
         ];
         log_cmd("reloadAgmts", "get repl agreements", cmd);
@@ -418,7 +418,7 @@ export class Replication extends React.Component {
             disabled: true,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-winsync-agmt", "list", "--suffix", suffix
         ];
         log_cmd("reloadWinsyncAgmts", "Get Winsync Agreements", cmd);
@@ -494,7 +494,7 @@ export class Replication extends React.Component {
             disabled: true,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "get", "--suffix", suffix
         ];
         log_cmd("reloadConfig", "Reload suffix repl config", cmd);
@@ -557,7 +557,7 @@ export class Replication extends React.Component {
             disabled: true,
         });
         // Load suffix RUV
-        const cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+        const cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'replication', 'get-ruv', '--suffix=' + suffix];
         log_cmd('reloadRUV', 'Get the suffix RUV', cmd);
         cockpit
@@ -603,7 +603,7 @@ export class Replication extends React.Component {
 
     loadLDIFs() {
         const cmd = [
-            "dsctl", "-j", this.props.serverId, "ldifs"
+            "podman-389-ds.sh", "dsctl", "-j", this.props.serverId, "ldifs"
         ];
         log_cmd("loadLDIFs", "Load replication LDIF Files", cmd);
         cockpit
@@ -637,7 +637,7 @@ export class Replication extends React.Component {
         });
 
         let cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "replication", "get", "--suffix", suffix
         ];
         log_cmd("loadReplSuffix", "Load suffix repl config", cmd);
@@ -687,7 +687,7 @@ export class Replication extends React.Component {
                         }
                     }, this.loadLDIFs);
 
-                    cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+                    cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
                         'replication', 'get-changelog', '--suffix', suffix];
                     log_cmd("loadReplSuffix", "Load the replication info", cmd);
                     cockpit
@@ -725,7 +725,7 @@ export class Replication extends React.Component {
 
                                 // Now load agmts, then the winsync agreement, and finally the RUV
                                 cmd = [
-                                    "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                                    "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                                     "repl-agmt", "list", "--suffix", suffix
                                 ];
                                 log_cmd("loadReplSuffix", "get repl agreements", cmd);
@@ -787,7 +787,7 @@ export class Replication extends React.Component {
 
                                             // Load winsync agreements
                                             cmd = [
-                                                "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+                                                "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
                                                 "repl-winsync-agmt", "list", "--suffix", suffix
                                             ];
                                             log_cmd("loadReplSuffix", "Get Winsync Agreements", cmd);
@@ -848,7 +848,7 @@ export class Replication extends React.Component {
                                                         });
 
                                                         // Load suffix RUV
-                                                        cmd = ['dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+                                                        cmd = ['podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
                                                             'replication', 'get-ruv', '--suffix=' + suffix];
                                                         log_cmd('loadReplSuffix', 'Get the suffix RUV', cmd);
                                                         cockpit
@@ -942,7 +942,7 @@ export class Replication extends React.Component {
     loadAttrs() {
         // Now get the schema that various tabs use
         const attr_cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema", "attributetypes", "list"
         ];
         log_cmd("Suffixes", "Get attrs", attr_cmd);

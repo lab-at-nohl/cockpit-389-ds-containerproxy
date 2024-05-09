@@ -29,7 +29,7 @@ export class ReplAgmtMonitor extends React.Component {
 
     pokeAgmt (evt) {
         const agmt_name = evt.target.id;
-        const cmd = ["dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+        const cmd = ["podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "repl-agmt", "poke", "--suffix=" + this.props.suffix, agmt_name];
         log_cmd("pokeAgmt", "Awaken the agreement", cmd);
         cockpit

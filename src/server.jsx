@@ -76,9 +76,9 @@ export class Server extends React.Component {
 
     getAttributes() {
         const attr_cmd = [
-            "dsconf",
+            "podman-389-ds.sh", "dsconf",
             "-j",
-            "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "schema",
             "attributetypes",
             "list"
@@ -104,7 +104,7 @@ export class Server extends React.Component {
             firstLoad: false
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("loadConfig", "Load server configuration", cmd);
@@ -135,7 +135,7 @@ export class Server extends React.Component {
 
     reloadConfig() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "config", "get"
         ];
         log_cmd("reloadConfig", "Reload server configuration", cmd);

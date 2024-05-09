@@ -272,7 +272,7 @@ export class Security extends React.Component {
 
     loadSupportedCiphers () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "ciphers", "list", "--supported"
         ];
         log_cmd("loadSupportedCiphers", "Load the security configuration", cmd);
@@ -299,7 +299,7 @@ export class Security extends React.Component {
 
     loadEnabledCiphers () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "ciphers", "list", "--enabled"
         ];
         log_cmd("loadEnabledCiphers", "Load the security configuration", cmd);
@@ -326,7 +326,7 @@ export class Security extends React.Component {
 
     loadCACerts () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "ca-certificate", "list",
         ];
         log_cmd("loadCACerts", "Load CA certificates", cmd);
@@ -356,7 +356,7 @@ export class Security extends React.Component {
     loadCerts () {
         // Set loaded: true
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "certificate", "list",
         ];
         log_cmd("loadCerts", "Load certificates", cmd);
@@ -390,7 +390,7 @@ export class Security extends React.Component {
 
     loadCSRs () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "csr", "list",
         ];
         log_cmd("loadCSRs", "Load CSRs", cmd);
@@ -419,7 +419,7 @@ export class Security extends React.Component {
 
     loadOrphanKeys () {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "key", "list", "--orphan"
         ];
         log_cmd("loadOrphanKeys", "Load Orphan Keys", cmd);
@@ -451,7 +451,7 @@ export class Security extends React.Component {
 
     loadRSAConfig() {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "rsa", "get"
         ];
         log_cmd("loadRSAConfig", "Load the RSA configuration", cmd);
@@ -482,7 +482,7 @@ export class Security extends React.Component {
 
     loadSecurityConfig(saving) {
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "get"
         ];
         log_cmd("loadSecurityConfig", "Load the security configuration", cmd);
@@ -632,13 +632,13 @@ export class Security extends React.Component {
         });
 
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "enable",
         ];
 
         if (this.state._nssslpersonalityssl !== this.state.primaryCertName) {
             const rsa_cmd = [
-                'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+                'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
                 'security', 'rsa', 'set', '--nss-cert-name=' + this.state.primaryCertName
             ];
             log_cmd("enableSecurity", "Update RSA", rsa_cmd);
@@ -738,7 +738,7 @@ export class Security extends React.Component {
             modalSpinning: true,
         });
         const cmd = [
-            "dsconf", "-j", "ldapi://%2fvar%2frun%2fslapd-" + this.props.serverId + ".socket",
+            "podman-389-ds.sh", "dsconf", "-j", "ldapi://%2fdata%2frun%2fslapd-" + this.props.serverId + ".socket",
             "security", "disable",
         ];
         log_cmd("disableSecurity", "Disable security", cmd);
@@ -798,11 +798,11 @@ export class Security extends React.Component {
         }
 
         const cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'security', 'set'
         ];
         const rsa_cmd = [
-            'dsconf', '-j', 'ldapi://%2fvar%2frun%2fslapd-' + this.props.serverId + '.socket',
+            'podman-389-ds.sh', 'dsconf', '-j', 'ldapi://%2fdata%2frun%2fslapd-' + this.props.serverId + '.socket',
             'security', 'rsa', 'set'
         ];
 
