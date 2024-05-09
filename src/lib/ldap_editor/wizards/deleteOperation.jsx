@@ -130,7 +130,7 @@ class DeleteOperationWizard extends React.Component {
             }
         );
 
-        const ldapsearchCmd = 'ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL ' +
+        const ldapsearchCmd = 'podman-389-ds.sh ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL ' +
             `-b "${this.props.wizardEntryDn}" ` +
             `-H ldapi://%2fdata%2frun%2fslapd-${this.props.editorLdapServer}.socket ` +
             '"(objectClass=*)" \\* +';

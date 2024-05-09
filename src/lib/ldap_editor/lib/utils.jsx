@@ -85,6 +85,7 @@ export function getUserSuffixes (serverId, suffixCallback) {
 
 export function ldapPing (serverId, pingCallback) {
   const cmd = [
+    'podman-389-ds.sh', 
     'ldapsearch',
     '-LLL',
     '-Y',
@@ -122,6 +123,7 @@ export function getRootSuffixEntryDetails (params, entryDetailsCallback) {
   const timeLimit = getTimeLimit();
 
   const cmd = [
+    'podman-389-ds.sh',
     'ldapsearch',
     '-LLL',
     '-o',
@@ -232,6 +234,7 @@ export function getSearchEntries (params, resultCallback) {
      params.timeLimit
   */
   const cmd = [
+    'podman-389-ds.sh',
     'ldapsearch',
     '-LLL',
     '-o',
@@ -362,6 +365,7 @@ export function getBaseLevelEntryAttributes (serverId, baseDn, entryAttributesCa
   const optionTimeLimit = timeLimit > 0 ? `-l ${timeLimit}` : '';
 
   const cmd = [
+    'podman-389-ds.sh',
     '/usr/bin/sh',
     '-c',
     `ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL -b "${baseDn}"` +
@@ -438,6 +442,7 @@ export function getBaseLevelEntryFullAttributes (serverId, baseDn, entryAttribut
   const timeLimit = getTimeLimit();
 
   const cmd = [
+    'podman-389-ds.sh',
     'ldapsearch',
     '-LLL',
     '-o',
@@ -504,6 +509,7 @@ export function getOneLevelEntries (params, oneLevelCallback) {
     : '(|(objectClass=*)(objectClass=ldapSubEntry))';
 
   const cmd = [
+    'podman-389-ds.sh',
     'ldapsearch',
     '-LLL',
     '-o',
@@ -639,6 +645,7 @@ export function runGenericSearch (params, searchCallback) {
   ]; */
 
   const cmd = [
+    'podman-389-ds.sh',
     '/usr/bin/sh',
     '-c',
     'ldapsearch -LLL -o ldif-wrap=no -Y EXTERNAL -b "' + params.baseDn +
@@ -667,6 +674,7 @@ export function runGenericSearch (params, searchCallback) {
 
 export function getMonitoringInfo (serverId, monitorEntryCallback) {
   const cmd = [
+    'podman-389-ds.sh', 
     'ldapsearch',
     '-LLL',
     '-o',
@@ -818,12 +826,14 @@ export function modifyLdapEntry (params, ldifArray, modifyEntryCallback) {
     }
   };
   const cmd = [
+    'podman-389-ds.sh',
     '/usr/bin/sh',
     '-c',
     `ldapmodify ${addOption} -Y EXTERNAL -H ` +
     `ldapi://%2fdata%2frun%2fslapd-${serverId}.socket `
   ];
   const cmd_copy = [
+    'podman-389-ds.sh',
     '/usr/bin/sh',
     '-c',
     `ldapmodify ${addOption} -Y EXTERNAL -H ` +
@@ -958,6 +968,7 @@ export function getAttributesNameAndOid (serverId, attrCallback) {
 
 export function deleteLdapData (serverId, entryDN, numSubordinates, deleteCallback) {
   let cmd = [
+    'podman-389-ds.sh',
     'ldapdelete',
     '-Y',
     'EXTERNAL',
